@@ -18,3 +18,10 @@ nnoremap /q :q!<CR>
 " Raccouri pour header 42
 nnoremap /h :Stdheader<CR>
 
+" Vérifie si c_formatter_42 est installé, sinon le clone
+if !isdirectory("$HOME/.local/share/c_formatter_42")
+    silent !git clone https://github.com/dawnbeen/c_formatter_42.git $HOME/.local/share/c_formatter_42
+endif
+
+" Commande pour formater le fichier courant avec c_formatter_42
+command! F42 :silent !python3 $HOME/.local/share/c_formatter_42/c_formatter_42.py %
