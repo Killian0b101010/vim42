@@ -2,7 +2,7 @@
 
 Ce projet installe automatiquement :
 - Le **formatter 42** (commande `f42`)
-- Le **plugin Header 42** pour Vim (commande `:Stdheader ou /h`)
+- Le **plugin Header 42** pour Vim (commande `:Stdheader`)
 
 ---
 
@@ -67,7 +67,48 @@ f42 test.c
 
 ---
 
-## 🛠️ **Désinstallation Complète**
+## 🛠️ **Configuration de Vim**
+
+Voici les options ajoutées dans **`.vimrc`** pour améliorer l'expérience :
+
+```vim
+set number            " Affiche les numéros de ligne
+syntax on             " Active la coloration syntaxique
+set tabstop=4         " Définit la largeur des tabulations
+set shiftwidth=4      " Définit la largeur de l'indentation
+set expandtab         " Convertit les tabulations en espaces
+set noerrorbells visualbell t_vb= " Supprime les sons d'erreur
+
+" Raccourcis personnalisés
+nnoremap /c :!gcc -Wall -Wextra -Werror % -o %< && ./%<<CR>  " Compile et exécute le fichier courant
+nnoremap /s :w!<CR>                                      " Sauvegarde rapide avec /s
+nnoremap /q :q!<CR>                                      " Quitter rapidement avec /q
+nnoremap /h :Stdheader<CR>                               " Insérer le header 42 avec /h
+
+" Commande pour formater le fichier courant avec c_formatter_42
+command! F42 :silent !python3 $HOME/.local/share/c_formatter_42/c_formatter_42.py %
+```
+
+### 📖 **Explication des commandes Vim**
+
+- **`set number`** : Affiche les numéros de ligne.
+- **`syntax on`** : Active la coloration syntaxique.
+- **`set tabstop=4`** : Définit la largeur d'une tabulation à 4 espaces.
+- **`set shiftwidth=4`** : Détermine l'indentation automatique à 4 espaces.
+- **`set expandtab`** : Remplace les tabulations par des espaces.
+- **`set noerrorbells visualbell t_vb=`** : Supprime les bips sonores.
+
+### 🔥 **Raccourcis personnalisés**
+
+- **`/c`** : Compile et exécute le fichier courant avec **GCC** (`gcc -Wall -Wextra -Werror`).
+- **`/s`** : Sauvegarder rapidement avec **`/s`**.
+- **`/q`** : Quitter rapidement Vim avec **`/q`**.
+- **`/h`** : Insérer le **header 42** avec **`/h`**.
+- **`:F42`** : Formater le fichier courant avec **`c_formatter_42`**.
+
+---
+
+## 🔄 **Désinstallation Complète**
 
 Pour supprimer tout ce qui a été installé :
 
@@ -86,10 +127,11 @@ rm -rf ~/vim42
 ## 💪 **Fonctionnalités Incluses**
 
 - ✅ **Formatter 42** accessible via la commande `f42`
-- ✅ **Header 42** intégré dans Vim avec `:Stdheader ou  /h en mode normal`
-- ✅ Installation 100% automatisée
+- ✅ **Header 42** intégré dans Vim avec `:Stdheader`
+- ✅ **Raccourcis Vim** pour compiler, sauvegarder et quitter
+- ✅ **Installation 100% automatisée**
 
 ---
 
-
+💎 *Fait avec passion pour simplifier la configuration des outils 42 !*
 
