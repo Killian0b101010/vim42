@@ -16,8 +16,6 @@ fi
 if [ ! -d "$HOME/.local/share/c_formatter_42" ]; then
     echo "Clonage du dépôt c_formatter_42..."
     git clone https://github.com/dawnbeen/c_formatter_42.git ~/.local/share/c_formatter_42
-else
-    echo "Le dépôt c_formatter_42 est déjà présent."
 fi
 
 # ✅ Installer les dépendances Python pour le formatter
@@ -33,29 +31,26 @@ sudo chmod +x /usr/local/bin/f42
 
 # ✅ Installer le plugin vim-42header
 if [ ! -d "$HOME/.vim/pack/plugins/start/vim-42header" ]; then
-    echo "Installation du plugin vim-42header..."
     git clone https://github.com/pbondoer/vim-42header.git ~/.vim/pack/plugins/start/vim-42header
-else
-    echo "Le plugin vim-42header est déjà installé."
 fi
 
-# ✅ Configuration automatique de Vim sans flash et avec raccourcis corrigés
+# ✅ Configuration automatique de Vim (commande simplifiée)
 if ! grep -q "Configuration automatique pour 42" ~/.vimrc; then
     cat <<EOF >> ~/.vimrc
 
 " === Configuration automatique pour 42 ===
-set number            " Affiche les numéros de ligne
-syntax on             " Active la coloration syntaxique
-set tabstop=4         " Définit la largeur des tabulations
-set shiftwidth=4      " Définit la largeur de l'indentation
-set expandtab         " Convertit les tabulations en espaces
-set noerrorbells      " Désactive les bips sonores
-set novisualbell      " Désactive le flash de l'écran
-set t_vb=             " Supprime complètement le flash visuel
+set number
+syntax on
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set noerrorbells
+set novisualbell
+set t_vb=
 
 " === Raccourcis ===
-" Compilation avec pause pour voir les erreurs
-nnoremap /c :w \| :!gcc -Wall -Wextra -Werror % -o %< && echo '✅ Compilation réussie !' || echo '❌ Erreurs de compilation. Appuie sur une touche...' && read<CR>
+" Compilation simple sans message, montre les erreurs ou lance le programme
+nnoremap /c :w \| :!gcc -Wall -Wextra -Werror % -o %< && ./%<<CR>
 
 " Sauvegarde rapide
 nnoremap /s :w!<CR>
@@ -73,4 +68,4 @@ else
     echo "La configuration Vim est déjà présente."
 fi
 
-echo "Installation terminée."
+echo "✅ Installation terminée."
