@@ -55,7 +55,7 @@ echo -e "${GREEN}⚙️  Configuration automatique du Header 42...${NC}"
 cat <<EOF >> ~/.vimrc
 
 " === Configuration du vim-42header ===
-let g:user42 = "Killian0b101010"
+let g:user42 = "Ton pseudos"
 let g:mail42 = "ton.email@42.fr"
 EOF
 
