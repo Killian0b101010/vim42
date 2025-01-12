@@ -1,38 +1,31 @@
 #!/bin/bash
 
-# ✅ Couleurs pour les messages
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-NC='\033[0m' # No Color
-
-echo -e "${GREEN}🚀 Installation de c_formatter_42 et vim-42header...${NC}"
-
 # ✅ Vérifier et installer Python3
 if ! command -v python3 &> /dev/null; then
-    echo -e "${GREEN}📦 Installation de Python3...${NC}"
+    echo "📦 Installation de Python3..."
     sudo apt-get install python3 python3-pip -y 2>/dev/null || brew install python3 || sudo pacman -S python
 fi
 
 # ✅ Vérifier et installer Git
 if ! command -v git &> /dev/null; then
-    echo -e "${GREEN}📦 Installation de Git...${NC}"
+    echo "📦 Installation de Git..."
     sudo apt-get install git -y 2>/dev/null || brew install git || sudo pacman -S git
 fi
 
 # ✅ Installer c_formatter_42
 if [ ! -d "$HOME/.local/share/c_formatter_42" ]; then
-    echo -e "${GREEN}🔄 Clonage du dépôt c_formatter_42...${NC}"
+    echo "🔄 Clonage du dépôt c_formatter_42..."
     git clone https://github.com/dawnbeen/c_formatter_42.git ~/.local/share/c_formatter_42
 else
-    echo -e "${GREEN}✅ Le dépôt c_formatter_42 est déjà présent.${NC}"
+    echo "✅ Le dépôt c_formatter_42 est déjà présent."
 fi
 
 # ✅ Installer les dépendances Python pour le formatter
-echo -e "${GREEN}📦 Installation des dépendances Python...${NC}"
+echo "📦 Installation des dépendances Python..."
 pip3 install -r ~/.local/share/c_formatter_42/requirements-dev.txt
 
 # ✅ Créer la commande f42
-echo -e "${GREEN}⚙️  Création de la commande f42...${NC}"
+echo "⚙️  Création de la commande f42..."
 
 sudo bash -c 'cat <<EOF > /usr/local/bin/f42
 #!/bin/bash
@@ -43,21 +36,21 @@ sudo chmod +x /usr/local/bin/f42
 
 # ✅ Installer le plugin vim-42header
 if [ ! -d "$HOME/.vim/pack/plugins/start/vim-42header" ]; then
-    echo -e "${GREEN}🔄 Installation du plugin vim-42header...${NC}"
+    echo "🔄 Installation du plugin vim-42header..."
     git clone https://github.com/pbondoer/vim-42header.git ~/.vim/pack/plugins/start/vim-42header
 else
-    echo -e "${GREEN}✅ Le plugin vim-42header est déjà installé.${NC}"
+    echo "✅ Le plugin vim-42header est déjà installé."
 fi
 
-# ✅ Configuration automatique de Vim
-echo -e "${GREEN}⚙️  Configuration automatique de Vim...${NC}"
+# ✅ Configuration automatique de Vim avec couleurs par défaut
+echo "⚙️  Configuration automatique de Vim..."
 
 if ! grep -q "Configuration automatique pour 42" ~/.vimrc; then
     cat <<EOF >> ~/.vimrc
 
 " === Configuration automatique pour 42 ===
 set number            " Affiche les numéros de ligne
-syntax on             " Active la coloration syntaxique
+syntax enable         " Active la coloration syntaxique par défaut
 set tabstop=4         " Définit la largeur des tabulations
 set shiftwidth=4      " Définit la largeur de l'indentation
 set expandtab         " Convertit les tabulations en espaces
@@ -74,9 +67,9 @@ nnoremap /h :Stdheader<CR>                                    " Insérer le head
 command! F42 :silent !python3 \$HOME/.local/share/c_formatter_42/c_formatter_42.py %
 EOF
 else
-    echo -e "${GREEN}✅ Configuration Vim déjà présente.${NC}"
+    echo "✅ Configuration Vim déjà présente."
 fi
 
-echo -e "${GREEN}🎉 Installation terminée !${NC}"
-echo -e "${GREEN}📝 Utilise :Stdheader dans Vim pour insérer le header 42.${NC}"
-echo -e "${GREEN}📝 Utilise la commande : f42 <fichier.c> pour formater ton code.${NC}"
+echo "🎉 Installation terminée !"
+echo "📝 Utilise :Stdheader dans Vim pour insérer le header 42."
+echo "📝 Utilise la commande : f42 <fichier.c> pour formater ton code."
