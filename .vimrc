@@ -1,0 +1,20 @@
+set number            " Affiche les numéros de ligne
+syntax on             " Active la coloration syntaxique
+set tabstop=4         " Définit la largeur des tabulations
+set shiftwidth=4      " Définit la largeur de l'indentation
+set expandtab         " Convertit les tabulations en espaces
+
+set noerrorbells visualbell t_vb=
+
+
+nnoremap /c :!gcc -Wall -Wextra -Werror % -o %< && ./%<<CR>
+
+" Raccourci /s pour sauvegarder
+nnoremap /s :w!<CR>
+
+" Raccourci /q pour quitter
+nnoremap /q :q!<CR>
+
+" Raccouri pour header 42
+nnoremap /h :Stdheader<CR>
+
