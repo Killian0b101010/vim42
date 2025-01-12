@@ -39,22 +39,23 @@ else
     echo "Le plugin vim-42header est déjà installé."
 fi
 
-# ✅ Configuration automatique de Vim sans couleur et avec raccourcis corrigés
+# ✅ Configuration automatique de Vim sans flash et avec raccourcis corrigés
 if ! grep -q "Configuration automatique pour 42" ~/.vimrc; then
     cat <<EOF >> ~/.vimrc
 
 " === Configuration automatique pour 42 ===
 set number            " Affiche les numéros de ligne
-syntax on             " Active la coloration syntaxique (par défaut)
+syntax on             " Active la coloration syntaxique
 set tabstop=4         " Définit la largeur des tabulations
 set shiftwidth=4      " Définit la largeur de l'indentation
 set expandtab         " Convertit les tabulations en espaces
 set noerrorbells      " Désactive les bips sonores
-set visualbell        " Active le bip visuel
+set novisualbell      " Désactive le flash de l'écran
+set t_vb=             " Supprime complètement le flash visuel
 
-" === Raccourcis personnalisés ===
+" === Raccourcis ===
 " Compilation avec pause pour voir les erreurs
-nnoremap /c :w \| :!gcc -Wall -Wextra -Werror % -o %< && ./%<; read -n 1 -s -r -p "Appuie sur une touche pour continuer..."<CR>
+nnoremap /c :w \| :!gcc -Wall -Wextra -Werror % -o %< && echo '✅ Compilation réussie !' || echo '❌ Erreurs de compilation. Appuie sur une touche...' && read<CR>
 
 " Sauvegarde rapide
 nnoremap /s :w!<CR>
@@ -72,4 +73,4 @@ else
     echo "La configuration Vim est déjà présente."
 fi
 
-echo "Installation terminée. Utilise :Stdheader pour insérer le header 42 et f42 pour formater."
+echo "Installation terminée."
