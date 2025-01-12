@@ -5,7 +5,7 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-echo -e "${GREEN}🚀 Installation de c_formatter_42...${NC}"
+echo -e "${GREEN}🚀 Installation de c_formatter_42 et 42header...${NC}"
 
 # ✅ Vérifier et installer Python3
 if ! command -v python3 &> /dev/null; then
@@ -39,8 +39,29 @@ sudo bash -c 'cat <<EOF > /usr/local/bin/f42
 PYTHONPATH="\$HOME/.local/share/c_formatter_42" python3 -m c_formatter_42 "\$@"
 EOF'
 
-# ✅ Donner les droits d'exécution
 sudo chmod +x /usr/local/bin/f42
 
+# ✅ Installer le plugin 42Header pour Vim
+if [ ! -d "$HOME/.vim/plugin" ]; then
+    mkdir -p ~/.vim/plugin
+fi
+
+if [ ! -f "$HOME/.vim/plugin/42header.vim" ]; then
+    echo -e "${GREEN}🔄 Installation du plugin 42Header...${NC}"
+    curl -o ~/.vim/plugin/42header.vim https://raw.githubusercontent.com/42Paris/42header/master/plugin/header42.vim
+else
+    echo -e "${GREEN}✅ Le plugin 42Header est déjà installé.${NC}"
+fi
+
+# ✅ Configuration du Header 42
+echo -e "${GREEN}⚙️  Configuration du Header 42...${NC}"
+cat <<EOF >> ~/.vimrc
+
+" === Configuration du 42Header ===
+let g:user42 = "TonPseudosIci"
+let g:mail42 = "ton.email@42.fr"
+EOF
+
 echo -e "${GREEN}🎉 Installation terminée ! Utilise la commande : f42 <fichier.c>${NC}"
+echo -e "${GREEN}📝 Dans Vim, tape :Stdheader pour insérer le header 42.${NC}"
 
