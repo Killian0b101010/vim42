@@ -41,27 +41,22 @@ EOF'
 
 sudo chmod +x /usr/local/bin/f42
 
-# ✅ Installer le plugin 42Header pour Vim
+# ✅ Installer le plugin 42Header pour Vim avec le bon lien
 if [ ! -d "$HOME/.vim/plugin" ]; then
     mkdir -p ~/.vim/plugin
 fi
 
-if [ ! -f "$HOME/.vim/plugin/42header.vim" ]; then
-    echo -e "${GREEN}🔄 Installation du plugin 42Header...${NC}"
-    curl -o ~/.vim/plugin/42header.vim https://raw.githubusercontent.com/42Paris/42header/master/plugin/header42.vim
-else
-    echo -e "${GREEN}✅ Le plugin 42Header est déjà installé.${NC}"
-fi
+echo -e "${GREEN}🔄 Installation du plugin 42Header...${NC}"
+curl -o ~/.vim/plugin/42header.vim https://raw.githubusercontent.com/42Paris/42header/master/plugin/header42.vim
 
 # ✅ Configuration du Header 42
 echo -e "${GREEN}⚙️  Configuration du Header 42...${NC}"
 cat <<EOF >> ~/.vimrc
 
 " === Configuration du 42Header ===
-let g:user42 = "TonPseudosIci"
+let g:user42 = "Killian0b101010"
 let g:mail42 = "ton.email@42.fr"
 EOF
 
 echo -e "${GREEN}🎉 Installation terminée ! Utilise la commande : f42 <fichier.c>${NC}"
 echo -e "${GREEN}📝 Dans Vim, tape :Stdheader pour insérer le header 42.${NC}"
-
